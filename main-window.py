@@ -1,6 +1,10 @@
 import random
 import os
 
+# Tkinter imports
+from tkinter import *
+
+
 def create_board(rows, cols, bombs):
     # Create an empty board
     board = [['-' for j in range(cols)] for i in range(rows)]
