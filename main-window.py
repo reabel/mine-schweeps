@@ -1,7 +1,9 @@
 import random
 import os
+import tkinter as tk
 
 def create_board(rows, cols, bombs):
+    #init_window()
     # Create an empty board
     board = [['-' for j in range(cols)] for i in range(rows)]
     # Place the bombs randomly
@@ -77,7 +79,36 @@ def check_win(board):
 #         row, col = get_user_input()
 #         # Existing code...
 
+def init_window():
+    # Init window
+    window = tk.Tk()
+    window.minsize(600, 600)
+    init_menu(window)
+    title = tk.Label(
+        text="Mine-schweeps",
+        foreground="white",
+        background="orange",
+        )
+    title.pack()
+    window.mainloop()
+
+def init_menu(window): 
+    menubar = tk.Menu(window)
+    filemenu = tk.Menu(menubar, tearoff=0)
+    filemenu.add_command(label="Exit", command=window.quit)
+    menubar.add_cascade(label="File", menu=filemenu)
+
+    window.config(menu=menubar)
 
 
 if __name__ == '__main__':
-    play()
+    #play()
+    init_window()
+
+
+
+# Sources:
+#   https://realpython.com/python-gui-tkinter/
+#   https://pythonspot.com/tk-menubar/
+#   https://tkdocs.com/tutorial/widgets.html
+#   https://tkdocs.com/tutorial/morewidgets.html
