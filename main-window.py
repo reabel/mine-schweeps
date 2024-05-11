@@ -83,22 +83,70 @@ def init_window():
     # Init window
     window = tk.Tk()
     window.minsize(600, 600)
-    init_menu(window)
-    title = tk.Label(
-        text="Mine-schweeps",
-        foreground="white",
-        background="orange",
-        )
-    title.pack()
+    window.title("Mine-Schweeps")
+    # title = tk.Label(
+    #     text="Mine-schweeps",
+    #     foreground="white",
+    #     background="orange",
+    #     )
+    # title.pack()
+
+    # May need to move canvas to the main func so that we can draw as we go.
+    canvas = tk.Canvas(window, width=405, height=405)
+    init_menu(window, canvas) # could see about allowing canvas in a more broad scope
+    init_grid(canvas)    
+    canvas.pack()
+
+    canvas.bind("<Button-1>", lambda event: handle_click(event, canvas))
+    canvas.bind("<Button-3>", lambda event: handle_rclick(event, canvas))
     window.mainloop()
 
-def init_menu(window): 
+def init_menu(window, canvas): 
     menubar = tk.Menu(window)
     filemenu = tk.Menu(menubar, tearoff=0)
+    filemenu.add_command(label="Reset", command=lambda: reset(canvas))
     filemenu.add_command(label="Exit", command=window.quit)
     menubar.add_cascade(label="File", menu=filemenu)
 
     window.config(menu=menubar)
+
+def init_grid(canvas):
+    square_size = 20  # Size of each square
+    for i in range(20):  # Rows
+        for j in range(20):  # Columns
+            x = j * square_size
+            y = i * square_size
+            canvas.create_rectangle(x + 5, y + 5, x + square_size + 5, y + square_size + 5)
+
+def handle_click(event, canvas):
+    # Calculate the grid coordinates from the pixel coordinates
+    grid_x = event.x // 20
+    grid_y = event.y // 20
+
+    # Print the grid coordinates
+    print(f"Clicked on grid coordinates: ({grid_x}, {grid_y})")
+
+    # Call your function to update the grid
+    update_coor(canvas, grid_x * 20, grid_y * 20)
+
+def handle_rclick(event, canvas):
+    # Calculate the grid coordinates from the pixel coordinates
+    grid_x = event.x // 20
+    grid_y = event.y // 20
+
+    # Print the grid coordinates
+    print(f"RClicked on grid coordinates: ({grid_x}, {grid_y})")
+
+    # Call your function to update the grid
+    update_coor(canvas, grid_x * 20, grid_y * 20, "yellow")
+
+def update_coor(canvas, xpos, ypos, color = "green"):
+    canvas.create_rectangle(xpos, ypos, xpos+20, ypos+20, fill = color)
+
+def reset(canvas):
+    print("deleting canvas")
+    canvas.delete("all")
+    init_grid(canvas)
 
 
 if __name__ == '__main__':
