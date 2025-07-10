@@ -2,6 +2,10 @@ import random
 import os
 import tkinter as tk
 
+# Tkinter imports
+from tkinter import *
+
+
 def create_board(rows, cols, bombs):
     #init_window()
     # Create an empty board
