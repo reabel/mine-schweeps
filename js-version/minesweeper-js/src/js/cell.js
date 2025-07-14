@@ -1,4 +1,4 @@
-class Cell {
+export class Cell {
     constructor(isMine = false) {
         this.isMine = isMine;
         this.isRevealed = false;
@@ -12,5 +12,12 @@ class Cell {
 
     toggleFlag() {
         this.isFlagged = !this.isFlagged;
+    }
+
+    getDisplayValue() {
+        if (this.isFlagged) return '🚩';
+        if (!this.isRevealed) return '';
+        if (this.isMine) return '💣';
+        return this.adjacentMines > 0 ? this.adjacentMines.toString() : '';
     }
 }

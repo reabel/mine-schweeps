@@ -7,17 +7,22 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1>Minesweeper</h1>
-    <div id="difficulty-selection">
-        <button id="easy">Easy</button>
-        <button id="medium">Medium</button>
-        <button id="hard">Hard</button>
+    <div class="container">
+        <h1>🎮 Minesweeper</h1>
+        <div id="difficulty-selection">
+            <h2>Select Difficulty:</h2>
+            <button id="easy" class="difficulty-btn">Easy (8x8, 10 mines)</button>
+            <button id="medium" class="difficulty-btn">Medium (16x16, 40 mines)</button>
+            <button id="hard" class="difficulty-btn">Hard (24x24, 99 mines)</button>
+        </div>
+        <div id="game-info">
+            <div id="mine-count">Mines: <span id="mines-remaining">0</span></div>
+            <div id="timer">Time: <span id="time-elapsed">0</span>s</div>
+            <button id="reset-btn" style="display: none;">New Game</button>
+        </div>
+        <div id="game-board"></div>
+        <div id="game-status"></div>
     </div>
-    <div id="game-board"></div>
-    <div id="game-status"></div>
-    <script type="module" src="js/difficulty.js"></script>
-    <script src="js/cell.js"></script>
-    <script type="module" src="js/board.js"></script>
-    <script type="module" src="js/game.js"></script>
+    <script type="module" src="js/main.js"></script>
 </body>
 </html>

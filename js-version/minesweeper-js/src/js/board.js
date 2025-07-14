@@ -1,4 +1,6 @@
-class Board {
+import { Cell } from './cell.js';
+
+export class Board {
     constructor(rows, cols, mineCount) {
         this.rows = rows;
         this.cols = cols;
@@ -48,27 +50,60 @@ class Board {
         }
     }
 
+    revealCell(row, col) {
+        if (row < 0 || row >= this.rows || col < 0 || col >= this.cols) return;
+        
+        const cell = this.cells[row][col];
+        if (cell.isRevealed || cell.isFlagged) return;
+        
+        cell.reveal();
+        
+        // If cell has no adjacent mines, reveal surrounding cells
+        if (cell.adjacentMines === 0 && !cell.isMine) {
+            for (let r = row - 1; r <= row + 1; r++) {
+                for (let c = col - 1; c <= col + 1; c++) {
+                    this.revealCell(r, c);
+                }
+            }
+        }
+        
+        return cell;
+    }
+
+    toggleFlag(row, col) {
+        if (row < 0 || row >= this.rows || col < 0 || col >= this.cols) return;
+        
+        const cell = this.cells[row][col];
+        if (!cell.isRevealed) {
+            cell.toggleFlag();
+        }
+        return cell;
+    }
+
+    isWon() {
+        for (let row = 0; row < this.rows; row++) {
+            for (let col = 0; col < this.cols; col++) {
+                const cell = this.cells[row][col];
+                if (!cell.isMine && !cell.isRevealed) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    revealAllMines() {
+        for (let row = 0; row < this.rows; row++) {
+            for (let col = 0; col < this.cols; col++) {
+                if (this.cells[row][col].isMine) {
+                    this.cells[row][col].reveal();
+                }
+            }
+        }
+    }
+
     resetBoard() {
         this.createBoard();
         this.isGameOver = false;
     }
 }
-
-class Cell {
-    constructor() {
-        this.isMine = false;
-        this.isRevealed = false;
-        this.adjacentMines = 0;
-        this.isFlagged = false;
-    }
-
-    reveal() {
-        this.isRevealed = true;
-    }
-
-    toggleFlag() {
-        this.isFlagged = !this.isFlagged;
-    }
-}
-
-export { Board, Cell };

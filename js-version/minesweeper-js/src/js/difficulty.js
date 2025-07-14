@@ -1,20 +1,23 @@
-const Difficulty = {
+export const Difficulty = {
     EASY: {
-        boardSize: 8,
-        numberOfMines: 10
+        rows: 8,
+        cols: 8,
+        mines: 10
     },
     MEDIUM: {
-        boardSize: 16,
-        numberOfMines: 40
+        rows: 16,
+        cols: 16,
+        mines: 40
     },
     HARD: {
-        boardSize: 24,
-        numberOfMines: 99
+        rows: 24,
+        cols: 24,
+        mines: 99
     }
 };
 
-function getDifficultySettings(level) {
-    switch (level) {
+export function getDifficultySettings(level) {
+    switch (level.toLowerCase()) {
         case 'easy':
             return Difficulty.EASY;
         case 'medium':
@@ -25,5 +28,3 @@ function getDifficultySettings(level) {
             throw new Error('Invalid difficulty level');
     }
 }
-
-export { Difficulty, getDifficultySettings };
