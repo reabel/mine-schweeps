@@ -1,1 +1,3 @@
 .DS_STORE
+# Ignore all instances of node_modules
+node_modules/

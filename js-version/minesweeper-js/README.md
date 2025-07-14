@@ -1,5 +1,7 @@
 # 🎮 Minesweeper JS - Node.js Edition
 
+![we-are-so-cooked](https://media1.tenor.com/m/1QW4ZcHeL-YAAAAd/cooked-myself-turkey-kramer.gif)
+
 A modern, responsive Minesweeper game built with JavaScript and served via Node.js Express server.
 
 ## 🚀 Features
