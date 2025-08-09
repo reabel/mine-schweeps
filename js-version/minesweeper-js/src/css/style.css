@@ -1,13 +1,38 @@
+:root {
+    /* Default theme variables - will be overridden by theme.js */
+    --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --text-primary: #ffffff;
+    --text-secondary: #ffffff;
+    --panel-bg: rgba(255, 255, 255, 0.1);
+    --panel-border: transparent;
+    --button-primary-bg: linear-gradient(45deg, #ff6b6b, #ee5a52);
+    --button-primary-hover: linear-gradient(45deg, #ff5252, #e53935);
+    --button-secondary-bg: linear-gradient(45deg, #4CAF50, #45a049);
+    --button-secondary-hover: linear-gradient(45deg, #45a049, #3d8b40);
+    --board-bg: #333333;
+    --cell-bg: #c0c0c0;
+    --cell-border: #c0c0c0;
+    --cell-hover: #d0d0d0;
+    --cell-revealed: #e0e0e0;
+    --cell-mine: #ff4444;
+    --game-over-color: #ff4444;
+    --game-won-color: #44ff44;
+    --theme-selector-bg: rgba(255, 255, 255, 0.15);
+    --theme-select-bg: rgba(255, 255, 255, 0.9);
+    --theme-select-color: #333333;
+}
+
 * {
     box-sizing: border-box;
 }
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: var(--bg-gradient);
     margin: 0;
     padding: 20px;
     min-height: 100vh;
+    transition: background 0.3s ease;
 }
 
 .container {
@@ -16,24 +41,58 @@ body {
     text-align: center;
 }
 
+#theme-selector {
+    background: var(--theme-selector-bg);
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--panel-border);
+}
+
+#theme-selector h3 {
+    color: var(--text-primary);
+    margin: 0 0 10px 0;
+    font-size: 16px;
+}
+
+#theme-select {
+    background: var(--theme-select-bg);
+    color: var(--theme-select-color);
+    border: none;
+    border-radius: 5px;
+    padding: 8px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#theme-select:hover {
+    opacity: 0.8;
+}
+
 h1 {
-    color: white;
+    color: var(--text-primary);
     font-size: 2.5em;
     margin-bottom: 30px;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    transition: color 0.3s ease;
 }
 
 h2 {
-    color: white;
+    color: var(--text-secondary);
     margin-bottom: 20px;
+    transition: color 0.3s ease;
 }
 
 #difficulty-selection {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--panel-bg);
     border-radius: 15px;
     padding: 30px;
     margin-bottom: 30px;
     backdrop-filter: blur(10px);
+    border: 1px solid var(--panel-border);
+    transition: all 0.3s ease;
 }
 
 .difficulty-btn {
@@ -43,7 +102,7 @@ h2 {
     font-size: 16px;
     font-weight: bold;
     color: white;
-    background: linear-gradient(45deg, #ff6b6b, #ee5a52);
+    background: var(--button-primary-bg);
     border: none;
     border-radius: 25px;
     cursor: pointer;
@@ -54,7 +113,7 @@ h2 {
 .difficulty-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-    background: linear-gradient(45deg, #ff5252, #e53935);
+    background: var(--button-primary-hover);
 }
 
 #game-info {
@@ -62,16 +121,17 @@ h2 {
     justify-content: center;
     gap: 30px;
     margin-bottom: 20px;
-    color: white;
+    color: var(--text-primary);
     font-size: 18px;
     font-weight: bold;
+    transition: color 0.3s ease;
 }
 
 #reset-btn {
     padding: 10px 25px;
     font-size: 16px;
     color: white;
-    background: linear-gradient(45deg, #4CAF50, #45a049);
+    background: var(--button-secondary-bg);
     border: none;
     border-radius: 20px;
     cursor: pointer;
@@ -82,24 +142,26 @@ h2 {
 #reset-btn:hover {
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    background: var(--button-secondary-hover);
 }
 
 #game-board {
     display: grid;
     gap: 1px;
     margin: 20px auto;
-    background-color: #333;
+    background-color: var(--board-bg);
     padding: 10px;
     border-radius: 10px;
     box-shadow: 0 8px 25px rgba(0,0,0,0.3);
     width: fit-content;
+    transition: background-color 0.3s ease;
 }
 
 .cell {
     width: 30px;
     height: 30px;
-    background-color: #c0c0c0;
-    border: 2px outset #c0c0c0;
+    background-color: var(--cell-bg);
+    border: 2px outset var(--cell-border);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -111,24 +173,24 @@ h2 {
 }
 
 .cell:hover:not(.revealed) {
-    background-color: #d0d0d0;
-    border-color: #d0d0d0;
+    background-color: var(--cell-hover);
+    border-color: var(--cell-hover);
 }
 
 .cell.revealed {
-    background-color: #e0e0e0;
-    border: 1px inset #e0e0e0;
+    background-color: var(--cell-revealed);
+    border: 1px inset var(--cell-revealed);
     cursor: default;
 }
 
 .cell.mine {
-    background-color: #ff4444 !important;
-    border-color: #ff4444 !important;
+    background-color: var(--cell-mine) !important;
+    border-color: var(--cell-mine) !important;
 }
 
 .cell.flagged {
-    background-color: #c0c0c0;
-    border: 2px outset #c0c0c0;
+    background-color: var(--cell-bg);
+    border: 2px outset var(--cell-border);
 }
 
 /* Number colors for adjacent mine counts */
@@ -146,14 +208,16 @@ h2 {
     font-size: 24px;
     font-weight: bold;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    color: var(--text-primary);
+    transition: color 0.3s ease;
 }
 
 #game-status.game-over {
-    color: #ff4444;
+    color: var(--game-over-color);
 }
 
 #game-status.game-won {
-    color: #44ff44;
+    color: var(--game-won-color);
 }
 
 /* Responsive design */
@@ -164,6 +228,20 @@ h2 {
     
     h1 {
         font-size: 2em;
+    }
+    
+    #theme-selector {
+        padding: 10px;
+        margin-bottom: 15px;
+    }
+    
+    #theme-selector h3 {
+        font-size: 14px;
+    }
+    
+    #theme-select {
+        padding: 6px 12px;
+        font-size: 12px;
     }
     
     .difficulty-btn {
@@ -182,4 +260,23 @@ h2 {
         height: 25px;
         font-size: 12px;
     }
+}
+
+/* Theme transition animations */
+* {
+    transition-property: background-color, color, border-color, background;
+    transition-duration: 0.3s;
+    transition-timing-function: ease;
+}
+
+/* Focus styles for accessibility */
+#theme-select:focus {
+    outline: 2px solid var(--text-primary);
+    outline-offset: 2px;
+}
+
+.difficulty-btn:focus,
+#reset-btn:focus {
+    outline: 2px solid rgba(255, 255, 255, 0.8);
+    outline-offset: 2px;
 }
