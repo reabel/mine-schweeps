@@ -7,12 +7,20 @@ A modern, responsive Minesweeper game built with JavaScript and served via Node.
 ## 🚀 Features
 
 - **Three Difficulty Levels**: Easy (8x8, 10 mines), Medium (16x16, 40 mines), Hard (24x24, 99 mines)
-- **Modern UI**: Beautiful gradient background with glassmorphism effects
+- **Multiple Color Themes**: Choose from 5 beautiful themes:
+  - **Classic**: Traditional blue-purple gradient
+  - **Dark**: Sleek dark mode with cool colors
+  - **Ocean**: Deep blue ocean-inspired theme
+  - **Forest**: Natural green forest theme
+  - **Sunset**: Warm orange-pink sunset colors
+- **Theme Persistence**: Your selected theme is saved and restored on next visit
+- **Modern UI**: Beautiful gradient backgrounds with glassmorphism effects
 - **Responsive Design**: Works on desktop and mobile devices
 - **Timer**: Track your solving time
 - **Mine Counter**: Keep track of remaining mines
 - **Flag System**: Right-click to flag suspected mines
 - **Auto-reveal**: Empty cells automatically reveal adjacent cells
+- **Smooth Animations**: Theme transitions and UI interactions are smoothly animated
 - **Node.js Server**: Served via Express for better performance and deployment options
 
 ## 🛠️ Installation
@@ -43,11 +51,12 @@ The game will be available at: **http://localhost:3000**
 
 ## 🎯 How to Play
 
-1. **Select Difficulty**: Choose between Easy, Medium, or Hard
-2. **Click cells** to reveal them
-3. **Right-click cells** to flag/unflag them as mines
-4. **Numbers** show how many mines are adjacent to that cell
-5. **Avoid mines** - clicking a mine ends the game
+1. **Select Theme**: Choose your preferred color theme from the dropdown at the top
+2. **Select Difficulty**: Choose between Easy, Medium, or Hard
+3. **Click cells** to reveal them
+4. **Right-click cells** to flag/unflag them as mines
+5. **Numbers** show how many mines are adjacent to that cell
+6. **Avoid mines** - clicking a mine ends the game
 6. **Win** by revealing all non-mine cells
 
 ## 🏗️ Project Structure
@@ -85,6 +94,41 @@ This project can be deployed to any Node.js hosting platform:
 - **Render**: Detects Node.js automatically
 - **Digital Ocean App Platform**: Use Node.js buildpack
 
+## 🎨 Theme System
+
+The game features a comprehensive theme system with 5 distinct visual themes:
+
+### Available Themes
+- **Classic**: Traditional minesweeper with blue-purple gradients
+- **Dark**: Modern dark mode with cool gray tones
+- **Ocean**: Deep blue oceanic theme with aquatic colors
+- **Forest**: Natural green theme inspired by forests
+- **Sunset**: Warm orange-pink gradient reminiscent of sunsets
+
+### Features
+- **Persistent Storage**: Your theme preference is saved in browser localStorage
+- **Smooth Transitions**: All theme changes animate smoothly with CSS transitions
+- **Complete Coverage**: Every UI element adapts to the selected theme
+- **Accessibility**: Focus indicators and contrast maintained across all themes
+
+### Technical Implementation
+The theme system uses CSS custom properties (variables) that are dynamically updated by JavaScript:
+
+```css
+:root {
+  --bg-gradient: /* Theme-specific gradient */;
+  --text-primary: /* Theme-specific text color */;
+  --cell-bg: /* Theme-specific cell background */;
+  /* ... other theme variables */
+}
+```
+
+Themes are managed by the `ThemeManager` class which:
+- Loads saved preferences from localStorage
+- Applies theme variables to CSS custom properties
+- Handles theme switching with smooth animations
+- Dispatches custom events for theme changes
+
 ## 📱 Browser Compatibility
 
 - Chrome/Edge: Full support
@@ -99,32 +143,6 @@ Feel free to submit issues and enhancement requests!
 ## 📄 License
 
 MIT License - feel free to use this project for your own purposes.
-
-## Game Overview
-Minesweeper is a logic-based puzzle game where the objective is to clear a rectangular board containing hidden "mines" without detonating any of them. The player uncovers cells one at a time, and each cell may contain a mine or a number indicating how many mines are adjacent to it.
-
-## Installation
-To set up the project locally, follow these steps:
-
-1. Clone the repository:
-   ```
-   git clone https://github.com/yourusername/minesweeper-js.git
-   ```
-2. Navigate to the project directory:
-   ```
-   cd minesweeper-js
-   ```
-3. Open `src/index.html` in your web browser to play the game.
-
-## How to Play
-1. Choose a difficulty level: Easy, Medium, or Hard.
-2. Click on a cell to reveal it. If you reveal a mine, the game is over.
-3. Use the numbers revealed to deduce where the mines are located.
-4. Right-click (or long-press on mobile) to flag a suspected mine.
-5. Try to clear the board without hitting any mines!
-
-## Game Structure
-- **src/index.html**: The main HTML file that sets up the game structure.
 - **src/css/style.css**: Contains styles for the game layout and animations.
 - **src/js/game.js**: Initializes the game and manages user interactions.
 - **src/js/board.js**: Defines the Board class and manages the game board.

@@ -1,7 +1,9 @@
 import { Game } from './game.js';
+import { ThemeManager } from './theme.js';
 
-// Initialize the game
+// Initialize the game and theme manager
 const game = new Game();
+const themeManager = new ThemeManager();
 
 // Set up difficulty selection
 document.addEventListener('DOMContentLoaded', () => {
